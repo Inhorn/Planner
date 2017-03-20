@@ -9,4 +9,6 @@
     <string name="wednesday">Wednesday</string>
     <string name="create">Create</string>
     <string name="textview">TextView</string>
+    <string name="action_delAll">Delete all tasks</string>
+    <string name="action_Quit">Quit</string>
 </resources>

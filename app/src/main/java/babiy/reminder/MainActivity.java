@@ -3,6 +3,8 @@ package babiy.reminder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnFriday;
     Button btnSaturday;
 
+    DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnThursday.setOnClickListener(this);
         btnFriday.setOnClickListener(this);
         btnSaturday.setOnClickListener(this);
+
+        db = new DatabaseHandler(this); // раз створти чи кожного разу створювати
+        // як вибрати тількт один стовбець   запсувати раз і оновляти чи працювати напряму з БД
 
     }
 
@@ -75,4 +81,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_delAll:
+                db.deleteAll();
+                break;
+            case R.id.action_Quit:
+                finish();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+

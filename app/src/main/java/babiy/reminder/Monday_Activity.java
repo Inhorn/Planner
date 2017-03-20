@@ -1,6 +1,7 @@
 package babiy.reminder;
 
 import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,16 +15,17 @@ import java.util.List;
 
 public class Monday_Activity extends AppCompatActivity implements View.OnClickListener{
 
-    Button btnCreate;
+
+    Button btnCrete;
     DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sunday);
+        setContentView(R.layout.activity_monday);
 
-        btnCreate = (Button) findViewById(R.id.btnCreate);
-        btnCreate.setOnClickListener(this);
+        btnCrete = (Button) findViewById(R.id.btnCreate);
+        btnCrete.setOnClickListener(this);
 
         db = new DatabaseHandler(this);
 
@@ -49,7 +51,6 @@ public class Monday_Activity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         Intent intent = new Intent(this, Edit_Activity.class);
         startActivityForResult(intent , 1);
-
     }
 
     @Override

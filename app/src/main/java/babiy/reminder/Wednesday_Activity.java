@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ public class Wednesday_Activity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sunday);
+        setContentView(R.layout.activity_wednesday);
 
         btnCreate = (Button) findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(this);
@@ -49,7 +50,6 @@ public class Wednesday_Activity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         Intent intent = new Intent(this, Edit_Activity.class);
         startActivityForResult(intent , 1);
-
     }
 
     @Override
