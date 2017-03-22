@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-
 class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
 
     private static final int DATABASE_VERSION = 1;
@@ -27,7 +26,7 @@ class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TASKS_TABLE = "CREATE TABLE " + TABLE_TASKS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-                + KEY_DAY + " TEXT" + ")";
+                + KEY_DAY + " TEXT," +")";
         db.execSQL(CREATE_TASKS_TABLE);
     }
 
@@ -40,15 +39,14 @@ class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
 
     @Override
     public void addTask(Task task) {
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, task.getTask());
         values.put(KEY_DAY, task.getDay());
+
         db.insert(TABLE_TASKS, null, values);
         db.close();
     }
-
 
     @Override
     public List<Task> getAllTasks(String day) {
@@ -61,6 +59,7 @@ class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
         if (cursor.moveToFirst()) {
             do {
                 Task task = new Task();
+                task.setId(Integer.parseInt(cursor.getString(0)));
                 task.setTask(cursor.getString(1));
                 task.setDay(cursor.getString(2));
                 taskList.add(task);
@@ -93,23 +92,21 @@ class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
     }
 
     @Override
-    public int editTask(Task task, String oldTask) {
+    public int editTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, task.getTask());
         values.put(KEY_DAY, task.getDay());
-
-        return db.update(TABLE_TASKS, values, KEY_NAME + " = ?" + " and " + KEY_DAY + " = ?",
-                new String[]{oldTask, task.getDay()});
+        return db.update(TABLE_TASKS, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(task.getId())});
     }
 
     @Override
     public void deleteTask(Task task) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_TASKS, KEY_NAME + " = ?" + " and " + KEY_DAY + " = ?", new String[]{task.getTask(),task.getDay()});
-        db.close();
-
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_TASKS, KEY_ID + " = ?",
+                new String[] { String.valueOf(task.getId()) });
+        database.close();
     }
 
     @Override

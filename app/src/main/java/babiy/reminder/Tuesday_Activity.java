@@ -74,10 +74,9 @@ public class Tuesday_Activity extends AppCompatActivity implements View.OnClickL
                     break;
                 case REQUEST_EDIT_TASK :
                     Task newTask = listTask.get(ID);
-                    String oldTask = newTask.getTask();
                     task = data.getStringExtra("task");
                     newTask.setTask(task);
-                    db.editTask(newTask, oldTask);
+                    db.editTask(newTask);
                     showTasks();
                     break;
             }

@@ -16,7 +16,6 @@ public class Edit_Activity extends AppCompatActivity implements View.OnClickList
 
     Button btnOk;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +31,7 @@ public class Edit_Activity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (TextUtils.isEmpty(editText.getText().toString())) {
-            Toast.makeText(Edit_Activity.this, "Task is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Edit_Activity.this, R.string.emptyTask, Toast.LENGTH_SHORT).show();
             return;
         }
 

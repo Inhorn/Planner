@@ -74,11 +74,9 @@ public class Friday_Activity extends AppCompatActivity implements View.OnClickLi
                     break;
                 case REQUEST_EDIT_TASK :
                     Task newTask = listTask.get(ID);
-                    String oldTask = newTask.getTask();
                     task = data.getStringExtra("task");
-                    newTask = listTask.get(ID);
                     newTask.setTask(task);
-                    db.editTask(newTask, oldTask);
+                    db.editTask(newTask);
                     showTasks();
                     break;
             }

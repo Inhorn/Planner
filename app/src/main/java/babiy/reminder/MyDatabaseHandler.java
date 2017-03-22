@@ -5,7 +5,7 @@ import java.util.List;
 interface MyDatabaseHandler {
     void addTask(Task task);
     List<Task> getAllTasks(String day);
-    int editTask(Task task, String oldTask);
+    int editTask(Task task);
     void deleteTask(Task task);
     void deleteAll();
     List<Task> getSearchTask ();

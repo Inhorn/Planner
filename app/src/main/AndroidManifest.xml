@@ -17,37 +17,39 @@
         </activity>
         <activity
             android:name=".Monday_Activity"
-            android:label="Monday" />
+            android:label="@string/monday" />
         <activity
             android:name=".Tuesday_Activity"
-            android:label="Tuesday" />
+            android:label="@string/tuesday" />
         <activity
             android:name=".Wednesday_Activity"
-            android:label="Wednesday" />
+            android:label="@string/wednesday" />
         <activity
             android:name=".Thursday_Activity"
-            android:label="Thursday" />
+            android:label="@string/thursday" />
         <activity
             android:name=".Friday_Activity"
-            android:label="Friday" />
+            android:label="@string/friday" />
         <activity
             android:name=".Saturday_Activity"
-            android:label="Saturday" />
+            android:label="@string/saturday" />
         <activity
             android:name=".Sunday_Activity"
-            android:label="Sunday" />
+            android:label="@string/sunday" />
         <activity
             android:name=".Edit_Activity"
-            android:label="Create Task"
+            android:label="@string/write"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".DeleteAll"
-            android:label="Delete all tasks?"
+            android:label="@string/deleteAll"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".SearchTwo"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
-        <activity android:name=".Completed"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
 package babiy.reminder;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadLocale();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
@@ -68,27 +73,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnTuesday:
                 DAY = "TUESDAY";
-                intent = new Intent(this, Sunday_Activity.class);
+                intent = new Intent(this, Tuesday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnWednesday:
                 DAY = "WEDNESDAY";
-                intent = new Intent(this, Sunday_Activity.class);
+                intent = new Intent(this, Wednesday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnThursday:
                 DAY = "THURSDAY";
-                intent = new Intent(this, Sunday_Activity.class);
+                intent = new Intent(this, Thursday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnFriday:
                 DAY = "FRIDAY";
-                intent = new Intent(this, Sunday_Activity.class);
+                intent = new Intent(this, Friday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnSaturday:
                 DAY = "SATURDAY";
-                intent = new Intent(this, Sunday_Activity.class);
+                intent = new Intent(this, Saturday_Activity.class);
                 startActivity(intent);
                 break;
         }
@@ -118,6 +123,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.action_Search:
                 intent = new Intent(this, Edit_Activity.class);
                 startActivityForResult(intent , REQUEST_SEARCH);
+                break;
+            case R.id.english:
+                saveLocale("default");
+                startActivity(getIntent());
+                break;
+            case R.id.Ukrainian:
+                saveLocale("ua");
+                startActivity(getIntent());
                 break;
         }
 
@@ -154,6 +167,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    public void loadLocale() {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        changeLang(language);
+    }
+
+    public void changeLang(String lang) {
+        if (lang.equalsIgnoreCase(""))
+            return;
+        Locale myLocale = new Locale(lang);
+        saveLocale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
+    public void saveLocale(String lang) {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(langPref, lang);
+        editor.commit();
     }
 }
 

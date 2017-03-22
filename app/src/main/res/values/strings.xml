@@ -2,21 +2,26 @@
     <string name="app_name">Reminder</string>
     <string name="friday">Friday</string>
     <string name="monday">Monday</string>
-    <string name="saturday">SATURDAY</string>
+    <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="thursday">Thursday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
     <string name="create">Create</string>
-    <string name="textview">TextView</string>
+    <string name="textView">TextView</string>
     <string name="action_delAll">Delete all tasks</string>
     <string name="action_Quit">Quit</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
-    <string name="delAll">Did you want delete all tasks?</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="okSearch">OK</string>
     <string name="search">Search</string>
-    <string name="action_Search">Search</string>
+    <string name="deleteAll">Delete all tasks?</string>
+    <string name="write">Write task</string>
+    <string name="emptyTask">Task is empty</string>
+    <string name="Language">Language</string>
+    <string name="English">English</string>
+    <string name="Ukrainian">Українська</string>
+
 </resources>

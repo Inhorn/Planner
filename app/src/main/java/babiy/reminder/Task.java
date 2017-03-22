@@ -4,6 +4,7 @@ public class Task {
 
     private String myTask;
     private String day;
+    private int id;
 
     public Task (){
 
@@ -15,7 +16,7 @@ public class Task {
     }
 
     public String getTask () {
-        return myTask;
+        return this.myTask;
     }
 
     public void setTask (String myTask) {
@@ -30,8 +31,16 @@ public class Task {
         this.day = day;
     }
 
+    public void setId (int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
     @Override
     public String toString() {
-        return myTask;
+        return this.myTask;
     }
 }
