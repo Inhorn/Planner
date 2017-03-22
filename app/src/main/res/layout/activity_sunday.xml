@@ -12,20 +12,10 @@
     tools:context="babiy.reminder.Sunday_Activity"
     android:background="@drawable/back">
 
-    <ScrollView
+    <ListView
+        android:id="@+id/lvList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scroll"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp">
-        <LinearLayout
-            android:id="@+id/linLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="wrap_content"/>
 
     <Button
         android:background="@drawable/newtask"

@@ -1,13 +1,9 @@
 package babiy.reminder;
 
-/**
- * Created by Iгор on 18.03.2017.
- */
-
 public class Task {
 
-    String myTask;
-    String day;
+    private String myTask;
+    private String day;
 
     public Task (){
 
@@ -32,5 +28,10 @@ public class Task {
 
     public void setDay (String day) {
         this.day = day;
+    }
+
+    @Override
+    public String toString() {
+        return myTask;
     }
 }

@@ -5,15 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Iгор on 18.03.2017.
- */
 
-public class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
+class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "myTasks";
@@ -23,7 +19,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandl
     private static final String KEY_DAY = "day";
 
 
-    public DatabaseHandler(Context context) {
+    DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -45,7 +41,6 @@ public class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandl
     @Override
     public void addTask(Task task) {
 
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, task.getTask());
@@ -55,16 +50,13 @@ public class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandl
     }
 
 
-
-
     @Override
     public List<Task> getAllTasks(String day) {
         List<Task> taskList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_TASKS;
+        String selectQuery = "SELECT  * FROM " + TABLE_TASKS + " WHERE " + KEY_DAY + " = " + " '" + day + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery,null);
-
 
         if (cursor.moveToFirst()) {
             do {
@@ -75,27 +67,47 @@ public class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandl
 
             } while (cursor.moveToNext());
         }
-
-
+        cursor.close();
         return taskList;
     }
 
     @Override
-    public int editTask(Task task) {
+    public List<Task> getSearchTask() {
+        List<Task> taskList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_TASKS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Task task = new Task();
+                task.setTask(cursor.getString(1));
+                task.setDay(cursor.getString(2));
+                taskList.add(task);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return taskList;
+    }
+
+    @Override
+    public int editTask(Task task, String oldTask) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, task.getTask());
         values.put(KEY_DAY, task.getDay());
 
-        return db.update(TABLE_TASKS, values, KEY_NAME + " = ?",
-                new String[]{String.valueOf(task.getTask())});
+        return db.update(TABLE_TASKS, values, KEY_NAME + " = ?" + " and " + KEY_DAY + " = ?",
+                new String[]{oldTask, task.getDay()});
     }
 
     @Override
     public void deleteTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_TASKS, KEY_NAME + " = ?", new String[]{task.getTask()});
+        db.delete(TABLE_TASKS, KEY_NAME + " = ?" + " and " + KEY_DAY + " = ?", new String[]{task.getTask(),task.getDay()});
         db.close();
 
     }

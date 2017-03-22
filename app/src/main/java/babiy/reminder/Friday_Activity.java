@@ -3,66 +3,57 @@ package babiy.reminder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
+import android.widget.ListView;
 import java.util.List;
 
 public class Friday_Activity extends AppCompatActivity implements View.OnClickListener{
 
-    Button btnCreate;
+    Button btnCrete;
     DatabaseHandler db;
+    ListView lvTasks;
+    List<Task> listTask;
+    static int ID = 0;
+
+    static final int REQUEST_ADD_TASK = 1;
+    static final int REQUEST_EDIT_TASK = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friday);
 
-        btnCreate = (Button) findViewById(R.id.btnCreate);
-        btnCreate.setOnClickListener(this);
+        btnCrete = (Button) findViewById(R.id.btnCreate);
+        btnCrete.setOnClickListener(this);
 
         db = new DatabaseHandler(this);
+        showTasks();
+    }
+    public void showTasks () {
+        listTask = db.getAllTasks(MainActivity.DAY);
+        lvTasks = (ListView) findViewById(R.id.lvList);
+        ArrayAdapter<Task> adapter = new ArrayAdapter<>(this, R.layout.item, listTask);
+        registerForContextMenu(lvTasks);
+        lvTasks.setAdapter(adapter);
 
-        LinearLayout linLayout = (LinearLayout) findViewById(R.id.linLayout);
-
-        LayoutInflater ltInflater = getLayoutInflater();
-
-        List<Task> listTask = db.getAllTasks("FRIDAY");
-        String temp;
-        for (Task ts : listTask) {
-            temp = ts.getDay();
-            if (temp.equals("FRIDAY")) {
-                View item = ltInflater.inflate(R.layout.item, linLayout, false);
-                TextView tvName = (TextView) item.findViewById(R.id.tvTask);
-                tvName.setText(ts.getTask());
-                item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
-                linLayout.addView(item);
+        lvTasks.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ID = position;
+                return false;
             }
-        }
-
+        });
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()){
-            case R.id.btnCreate:
-                intent = new Intent(this, Edit_Activity.class);
-                startActivityForResult(intent , 1);
-                break;
-
-
-        }
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
+        Intent intent = new Intent(this, Edit_Activity.class);
+        startActivityForResult(intent , REQUEST_ADD_TASK);
     }
 
     @Override
@@ -72,15 +63,47 @@ public class Friday_Activity extends AppCompatActivity implements View.OnClickLi
         if (data == null){
             return;
         }
-        if (resultCode == RESULT_OK){
-                if (requestCode == 1){
-                    String task = data.getStringExtra("task");
-                    db.addTask(new Task(task ,"FRIDAY"));
-                    recreate();
-
-                }
+        if (resultCode == RESULT_OK) {
+            String task;
+            switch (requestCode) {
+                case  REQUEST_ADD_TASK :
+                    task = data.getStringExtra("task");
+                    db.addTask(new Task(task, MainActivity.DAY));
+                    finish();
+                    startActivity(getIntent());
+                    break;
+                case REQUEST_EDIT_TASK :
+                    Task newTask = listTask.get(ID);
+                    String oldTask = newTask.getTask();
+                    task = data.getStringExtra("task");
+                    newTask = listTask.get(ID);
+                    newTask.setTask(task);
+                    db.editTask(newTask, oldTask);
+                    showTasks();
+                    break;
+            }
         }
-
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.context_menu, menu);
     }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.itemDelete:
+                db.deleteTask(listTask.get(ID));
+                finish();
+                startActivity(getIntent());
+                break;
+            case R.id.itemEdit:
+                Intent intent = new Intent(this, Edit_Activity.class);
+                startActivityForResult(intent, REQUEST_EDIT_TASK);
+                break;
+        }
+
+        return super.onContextItemSelected(item);
+    }
 }

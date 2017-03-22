@@ -15,22 +15,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Monday_Activity"
-            android:label="Monday"/>
-        <activity android:name=".Tuesday_Activity"
-            android:label="Tuesday"/>
-        <activity android:name=".Wednesday_Activity"
-            android:label="Wednesday"/>
-        <activity android:name=".Thursday_Activity"
-            android:label="Thursday"/>
-        <activity android:name=".Friday_Activity"
-            android:label="Friday"/>
-        <activity android:name=".Saturday_Activity"
-            android:label="Saturday"/>
-        <activity android:name=".Sunday_Activity"
-            android:label="Sunday"/>
-        <activity android:name=".Edit_Activity"
-            android:label="Create Task">
+        <activity
+            android:name=".Monday_Activity"
+            android:label="Monday" />
+        <activity
+            android:name=".Tuesday_Activity"
+            android:label="Tuesday" />
+        <activity
+            android:name=".Wednesday_Activity"
+            android:label="Wednesday" />
+        <activity
+            android:name=".Thursday_Activity"
+            android:label="Thursday" />
+        <activity
+            android:name=".Friday_Activity"
+            android:label="Friday" />
+        <activity
+            android:name=".Saturday_Activity"
+            android:label="Saturday" />
+        <activity
+            android:name=".Sunday_Activity"
+            android:label="Sunday" />
+        <activity
+            android:name=".Edit_Activity"
+            android:label="Create Task"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity
+            android:name=".DeleteAll"
+            android:label="Delete all tasks?"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+
+        <activity
+            android:name=".SearchTwo"
+            android:theme="@style/Theme.AppCompat.Dialog">
 
         </activity>
     </application>

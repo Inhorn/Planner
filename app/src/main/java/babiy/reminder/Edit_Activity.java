@@ -31,8 +31,6 @@ public class Edit_Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
-
         if (TextUtils.isEmpty(editText.getText().toString())) {
             Toast.makeText(Edit_Activity.this, "Task is empty", Toast.LENGTH_SHORT).show();
             return;
@@ -41,7 +39,7 @@ public class Edit_Activity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent();
         intent.putExtra("task", editText.getText().toString());
         setResult(RESULT_OK, intent);
-        finish();
+        Edit_Activity.this.finish();
 
     }
 }

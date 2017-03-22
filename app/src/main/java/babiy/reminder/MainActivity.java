@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,6 +21,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnSaturday;
 
     DatabaseHandler db;
+
+    static String DAY;
+    static List<Task> searchList;
+
+    static final int REQUEST_DELL_ALL = 1;
+    static final int REQUEST_SEARCH = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnFriday.setOnClickListener(this);
         btnSaturday.setOnClickListener(this);
 
-        db = new DatabaseHandler(this); // раз створти чи кожного разу створювати
-        // як вибрати тількт один стовбець   запсувати раз і оновляти чи працювати напряму з БД
-
+        db = new DatabaseHandler(this);
     }
 
     @Override
@@ -51,35 +57,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.btnSunday:
+                DAY = "SUNDAY";
                 intent = new Intent(this, Sunday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnMonday:
+                DAY = "MONDAY";
                 intent = new Intent(this, Monday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnTuesday:
-                intent = new Intent(this, Tuesday_Activity.class);
+                DAY = "TUESDAY";
+                intent = new Intent(this, Sunday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnWednesday:
-                intent = new Intent(this, Wednesday_Activity.class);
+                DAY = "WEDNESDAY";
+                intent = new Intent(this, Sunday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnThursday:
-                intent = new Intent(this, Tuesday_Activity.class);
+                DAY = "THURSDAY";
+                intent = new Intent(this, Sunday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnFriday:
-                intent = new Intent(this, Friday_Activity.class);
+                DAY = "FRIDAY";
+                intent = new Intent(this, Sunday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnSaturday:
-                intent = new Intent(this, Saturday_Activity.class);
+                DAY = "SATURDAY";
+                intent = new Intent(this, Sunday_Activity.class);
                 startActivity(intent);
                 break;
         }
-
     }
 
     @Override
@@ -93,17 +105,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
+        Intent intent;
 
         switch (id){
             case R.id.action_delAll:
-                db.deleteAll();
+                intent = new Intent(this, DeleteAll.class);
+                startActivityForResult(intent, REQUEST_DELL_ALL);
                 break;
             case R.id.action_Quit:
-                finish();
+                System.exit(0);
+                break;
+            case R.id.action_Search:
+                intent = new Intent(this, Edit_Activity.class);
+                startActivityForResult(intent , REQUEST_SEARCH);
+                break;
         }
 
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (data == null){
+            return;
+        }
+        if (resultCode == RESULT_OK){
+
+            switch (requestCode) {
+                case 1:
+                    db.deleteAll();
+                    finish();
+                    startActivity(getIntent());
+                    break;
+                case REQUEST_SEARCH:
+                    searchList = new ArrayList<>();
+                    List<Task> temp =  db.getSearchTask();
+                    String task = data.getStringExtra("task").toLowerCase();
+                    for (Task ts : temp){
+                        if (ts.getTask().toLowerCase().contains(task)){
+                            searchList.add(ts);
+                        }
+                    }
+                    Intent intent = new Intent(this, SearchTwo.class);
+                    startActivity(intent);
+                    break;
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
 

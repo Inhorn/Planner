@@ -11,4 +11,12 @@
     <string name="textview">TextView</string>
     <string name="action_delAll">Delete all tasks</string>
     <string name="action_Quit">Quit</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="delAll">Did you want delete all tasks?</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="okSearch">OK</string>
+    <string name="search">Search</string>
+    <string name="action_Search">Search</string>
 </resources>
