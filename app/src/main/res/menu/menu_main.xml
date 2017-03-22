@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:icon="@drawable/delall"
+        android:id="@+id/action_delAll"
+        android:orderInCategory="100"
+        android:title="@string/action_delAll"
+        app:showAsAction="ifRoom" />
+    <item
+        android:icon="@drawable/exit"
+        android:id="@+id/action_Quit"
+        android:orderInCategory="100"
+        android:title="@string/action_Quit"
+        app:showAsAction="ifRoom" />
+    <item
+        android:icon="@android:drawable/ic_search_category_default"
+        android:id="@+id/action_Search"
+        android:orderInCategory="100"
+        android:title="@string/action_Search"
+        app:showAsAction="ifRoom" />
+</menu>

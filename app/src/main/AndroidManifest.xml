@@ -39,17 +39,15 @@
         <activity
             android:name=".Edit_Activity"
             android:label="Create Task"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".DeleteAll"
             android:label="Delete all tasks?"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
-
+            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".SearchTwo"
-            android:theme="@style/Theme.AppCompat.Dialog">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity android:name=".Completed"></activity>
     </application>
 
 </manifest>
