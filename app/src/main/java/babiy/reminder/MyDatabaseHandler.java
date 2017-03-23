@@ -9,4 +9,5 @@ interface MyDatabaseHandler {
     void deleteTask(Task task);
     void deleteAll();
     List<Task> getSearchTask ();
+    void delAllDay (String day);
 }

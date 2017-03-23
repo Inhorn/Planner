@@ -23,5 +23,13 @@
     <string name="Language">Language</string>
     <string name="English">English</string>
     <string name="Ukrainian">Українська</string>
+    <string name="labelSunday">Sunday</string>
+    <string name="labelMonday">Monday</string>
+    <string name="labelTuesday">Tuesday</string>
+    <string name="labelWednesday">Wednesday</string>
+    <string name="labelThursday">Thursday</string>
+    <string name="labelFriday">Friday</string>
+    <string name="labelSaturday">Saturday</string>
+    <string name="deleteAllTasks">Delete All</string>
 
 </resources>

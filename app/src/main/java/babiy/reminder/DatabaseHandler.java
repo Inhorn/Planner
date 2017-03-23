@@ -26,7 +26,7 @@ class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TASKS_TABLE = "CREATE TABLE " + TABLE_TASKS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-                + KEY_DAY + " TEXT," +")";
+                + KEY_DAY + " TEXT" +")";
         db.execSQL(CREATE_TASKS_TABLE);
     }
 
@@ -114,5 +114,12 @@ class DatabaseHandler extends SQLiteOpenHelper implements MyDatabaseHandler {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASKS, null, null);
         db.close();
+    }
+    @Override
+    public void delAllDay(String day) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_TASKS, KEY_DAY + " = ?",
+                new String[] { day });
+        database.close();
     }
 }

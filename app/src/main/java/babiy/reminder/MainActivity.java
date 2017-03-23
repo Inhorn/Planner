@@ -126,10 +126,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.english:
                 saveLocale("default");
+                finish();
                 startActivity(getIntent());
                 break;
             case R.id.Ukrainian:
                 saveLocale("ua");
+                finish();
                 startActivity(getIntent());
                 break;
         }
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (resultCode == RESULT_OK){
 
             switch (requestCode) {
-                case 1:
+                case REQUEST_DELL_ALL:
                     db.deleteAll();
                     finish();
                     startActivity(getIntent());
@@ -168,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     public void loadLocale() {
         String langPref = "Language";
         SharedPreferences prefs = getSharedPreferences("CommonPrefs",

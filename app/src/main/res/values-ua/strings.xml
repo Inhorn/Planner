@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Reminder</string>
+    <string name="friday">Пятниця</string>
+    <string name="monday">Понеділок</string>
+    <string name="saturday">Субота</string>
+    <string name="sunday">Неділя</string>
+    <string name="thursday">Четвер</string>
+    <string name="tuesday">Вівторок</string>
+    <string name="wednesday">Середа</string>
+    <string name="create">Створити</string>
+    <string name="textView">TextView</string>
+    <string name="action_delAll">Видалити всі завдання</string>
+    <string name="action_Quit">Вихід</string>
+    <string name="cancel">Відмінити</string>
+    <string name="ok">OK</string>
+    <string name="delete">Видалити</string>
+    <string name="edit">Завдання</string>
+    <string name="search">Пошук</string>
+    <string name="deleteAll">Видалити всі завдання?</string>
+    <string name="write">Впишіть завдання</string>
+    <string name="emptyTask">Завдання пусте</string>
+    <string name="Language">Мова</string>
+    <string name="English">English</string>
+    <string name="labelSunday">Неділя</string>
+    <string name="labelMonday">Понеділок</string>
+    <string name="labelTuesday">Вівторок</string>
+    <string name="labelWednesday">Середа</string>
+    <string name="labelThursday">Четвер</string>
+    <string name="labelFriday">Пятниця</string>
+    <string name="labelSaturday">Субота</string>
+    <string name="deleteAllTasks">Видалити всі</string>
+</resources>
