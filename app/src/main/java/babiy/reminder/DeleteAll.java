@@ -17,6 +17,7 @@ public class DeleteAll extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(getString(R.string.deleteAll));
         setContentView(R.layout.activity_delete_all);
 
         btnOk = (Button) findViewById(R.id.btnOk);

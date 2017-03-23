@@ -28,7 +28,6 @@ public class Monday_Activity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle(MainActivity.DAY);
 
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.labelMonday));

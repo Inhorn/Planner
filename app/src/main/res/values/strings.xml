@@ -31,5 +31,12 @@
     <string name="labelFriday">Friday</string>
     <string name="labelSaturday">Saturday</string>
     <string name="deleteAllTasks">Delete All</string>
+    <string name="searchSunday">Sunday</string>
+    <string name="searchMonday">Monday</string>
+    <string name="searchTuesday">Tuesday</string>
+    <string name="searchWednesday">Wednesday</string>
+    <string name="searchThursday">Thursday</string>
+    <string name="searchFriday">Friday</string>
+    <string name="searchSaturday">Saturday</string>
 
 </resources>

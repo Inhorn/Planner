@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DatabaseHandler db;
 
     static String DAY;
+    static String DAY_SEARCH;
+
     static List<Task> searchList;
 
     static final int REQUEST_DELL_ALL = 1;
@@ -62,37 +64,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.btnSunday:
-                DAY = "SUNDAY";
+                DAY = getString(R.string.searchSunday);
                 intent = new Intent(this, Sunday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnMonday:
-                DAY = "MONDAY";
+                DAY = getString(R.string.searchMonday);
                 intent = new Intent(this, Monday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnTuesday:
-                DAY = "TUESDAY";
+                DAY = getString(R.string.searchTuesday);
                 intent = new Intent(this, Tuesday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnWednesday:
-                DAY = "WEDNESDAY";
+                DAY = getString(R.string.searchWednesday);
                 intent = new Intent(this, Wednesday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnThursday:
-                DAY = "THURSDAY";
+                DAY = getString(R.string.searchThursday);
                 intent = new Intent(this, Thursday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnFriday:
-                DAY = "FRIDAY";
+                DAY = getString(R.string.searchFriday);
                 intent = new Intent(this, Friday_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnSaturday:
-                DAY = "SATURDAY";
+                DAY = getString(R.string.searchSaturday);
                 intent = new Intent(this, Saturday_Activity.class);
                 startActivity(intent);
                 break;
@@ -126,11 +128,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.english:
                 saveLocale("default");
+                DAY_SEARCH = "default";
                 finish();
                 startActivity(getIntent());
                 break;
             case R.id.Ukrainian:
                 saveLocale("ua");
+                DAY_SEARCH = "ua";
                 finish();
                 startActivity(getIntent());
                 break;
@@ -176,7 +180,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs = getSharedPreferences("CommonPrefs",
                 Activity.MODE_PRIVATE);
         String language = prefs.getString(langPref, "");
+        DAY_SEARCH = language;
         changeLang(language);
+
     }
 
     public void changeLang(String lang) {
